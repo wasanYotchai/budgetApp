@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,7 +26,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { CreateAccountDrawer } from "@/components/create-account-drawer";
+import CreateAccountDrawer from "@/components/create-account-drawer";
 import { cn } from "@/lib/utils";
 import { createTransaction, updateTransaction } from "@/actions/transaction";
 import { transactionSchema } from "@/app/lib/schema";
@@ -130,7 +131,7 @@ export function AddTransactionForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
+      {/* Receipt Scanner - Only show in create mode */}
 
       {/* Type */}
       <div className="space-y-2">
@@ -139,7 +140,7 @@ export function AddTransactionForm({
           onValueChange={(value) => setValue("type", value)}
           defaultValue={type}
         >
-          <SelectTrigger>
+          <SelectTrigger className="w-full">
             <SelectValue placeholder="Select type" />
           </SelectTrigger>
           <SelectContent>
@@ -173,7 +174,7 @@ export function AddTransactionForm({
             onValueChange={(value) => setValue("accountId", value)}
             defaultValue={getValues("accountId")}
           >
-            <SelectTrigger>
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Select account" />
             </SelectTrigger>
             <SelectContent>
@@ -205,7 +206,7 @@ export function AddTransactionForm({
           onValueChange={(value) => setValue("category", value)}
           defaultValue={getValues("category")}
         >
-          <SelectTrigger>
+          <SelectTrigger className="w-full">
             <SelectValue placeholder="Select category" />
           </SelectTrigger>
           <SelectContent>
@@ -304,6 +305,7 @@ export function AddTransactionForm({
       )}
 
       {/* Actions */}
+      <div className="grid gap-6 md:grid-cols-2">
       <div className="flex gap-4">
         <Button
           type="button"
@@ -313,8 +315,11 @@ export function AddTransactionForm({
         >
           Cancel
         </Button>
-        <Button type="submit" className="w-full" disabled={transactionLoading}>
-          {transactionLoading ? (
+        <Button 
+        type="submit" 
+        className="w-full rounded-lg bg-[#2e6b4c] text-[#fefaf3] font-semibold transition-colors hover:bg-[#3b7a5a] focus:ring-2 focus:ring-offset-2 focus:ring-[#c7e5d6] disabled:opacity-50`}" 
+        disabled={transactionLoading}>
+        {transactionLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               {editMode ? "Updating..." : "Creating..."}
@@ -326,6 +331,11 @@ export function AddTransactionForm({
           )}
         </Button>
       </div>
+      </div>
     </form>
+
   );
-}
+};
+
+
+
