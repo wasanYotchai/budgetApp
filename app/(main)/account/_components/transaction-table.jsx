@@ -353,32 +353,37 @@ const [recurringFilter, setRecurringFilter] = useState("");
                       </Badge>
                     )}
                   </TableCell>
-
+                  
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                          <MoreHorizontal className="h-4 w-4" />
+                        <Button
+                          variant="ghost"
+                          className="h-8 w-8 p-0 hover:bg-[#f8f4ec] rounded-full transition"
+                        >
+                          <MoreHorizontal className="h-4 w-4 text-[#a67c52]" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent>
+                      <DropdownMenuContent className="rounded-xl bg-[#fdfaf3] shadow-md border border-[#e9e4da]">
                         <DropdownMenuLabel
-                        onClick={() =>
-                            router.push(
-                                `/transaction/create?edit=${transaction.id}`
-                            )
-                        }>
-                            Edit</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem 
-                        className="text-red-600 hover:bg-red-50"
-                        onClick={()=>deleteFn([transaction.id])} 
-                        > 
-                        🗑️ Delete
+                          onClick={() =>
+                            router.push(`/transaction/create?edit=${transaction.id}`)
+                          }
+                          className="cursor-pointer px-3 py-2 rounded-md hover:bg-[#f5eee1] text-[#a67c52] font-medium transition-colors"
+                        >
+                          ✏️ Edit
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator className="my-1 border-[#e9e4da]" />
+                        <DropdownMenuItem
+                          className="text-[#a0522d] hover:bg-[#fceee6] px-3 py-2 rounded-md font-medium cursor-pointer transition-colors"
+                          onClick={() => deleteFn([transaction.id])}
+                        >
+                          🗑️ Delete
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
-                  </TableCell>
+                </TableCell>
+                  
                 </TableRow>
               ))
             )}
